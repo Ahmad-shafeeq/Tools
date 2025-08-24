@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #F5F5F5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: linear-gradient(to right, #4A00E0, #3F51B5);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            width: 100%;
+        }
+
+        .calculator-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-header {
+            padding: 20px;
+            color: #333; /* Changed to dark color for better contrast */
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+            background: #FFFFFF;
+        }
+
+        input:focus, select:focus {
+            border-color: #4A00E0;
+            outline: none;
+        }
+
+        button {
+            background: linear-gradient(to right, #4A00E0, #3F51B5);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            transition: opacity 0.3s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333; /* Ensure result text is visible */
+        }
+
+        /* Calculator-specific colors */
+        .unit-conversion .card-header {
+            background: #80CBC4; /* Light Green/Aqua */
+            color: #333; /* Dark text for contrast */
+        }
+
+        .age-calculator .card-header {
+            background: #F28B82; /* Light Red/Coral */
+            color: #333; /* Dark text for contrast */
+        }
+
+        .bmi-calculator .card-header {
+            background: #90CAF9; /* Light Blue */
+            color: #333; /* Dark text for contrast */
+        }
+
+        .weight-converter .card-header {
+            background: #FFAB91; /* Light Orange/Peach */
+            color: #333; /* Dark text for contrast */
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .calculator-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .conversion-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .conversion-group select {
+            flex: 1;
+        }
+
+        .icon {
+            font-size: 1.2rem;
+            color: #4A00E0;
+        }
+        
+        /* Fix for option text visibility */
+        select option {
+            color: #333;
+            background: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Modern Calculator Suite</h1>
+            <p class="subtitle">All the tools you need in one place</p>
+        </header>
+
+        <div class="calculator-grid">
+            <!-- Unit Conversion Calculator -->
+            <div class="calculator-card unit-conversion">
+                <div class="card-header">
+                    <i class="fas fa-ruler-combined"></i> Unit Conversions
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="conversionValue">Value</label>
+                        <input type="number" id="conversionValue" placeholder="Enter value" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label>Conversion Type</label>
+                        <div class="conversion-group">
+                            <select id="fromUnit">
+                                <option value="m">Meter (m)</option>
+                                <option value="cm">Centimeter (cm)</option>
+                                <option value="km">Kilometer (km)</option>
+                                <option value="mi">Mile (mi)</option>
+                            </select>
+                            <span class="icon"><i class="fas fa-exchange-alt"></i></span>
+                            <select id="toUnit">
+                                <option value="mi">Mile (mi)</option>
+                                <option value="m">Meter (m)</option>
+                                <option value="cm">Centimeter (cm)</option>
+                                <option value="km">Kilometer (km)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="convertUnits()">Convert</button>
+                    <div class="result" id="conversionResult">
+                        Result will appear here
+                    </div>
+                </div>
+            </div>
+
+            <!-- Age Calculator -->
+            <div class="calculator-card age-calculator">
+                <div class="card-header">
+                    <i class="fas fa-birthday-cake"></i> Age Calculator
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="birthDate">Date of Birth</label>
+                        <input type="date" id="birthDate">
+                    </div>
+                    <button onclick="calculateAge()">Calculate Age</button>
+                    <div class="result" id="ageResult">
+                        Your age will appear here
+                    </div>
+                </div>
+            </div>
+
+            <!-- BMI Calculator -->
+            <div class="calculator-card bmi-calculator">
+                <div class="card-header">
+                    <i class="fas fa-weight"></i> BMI Calculator
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" id="height" placeholder="Enter height in cm">
+                    </div>
+                    <div class="input-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" placeholder="Enter weight in kg">
+                    </div>
+                    <button onclick="calculateBMI()">Calculate BMI</button>
+                    <div class="result" id="bmiResult">
+                        Your BMI will appear here
+                    </div>
+                </div>
+            </div>
+
+            <!-- Weight Converter -->
+            <div class="calculator-card weight-converter">
+                <div class="card-header">
+                    <i class="fas fa-balance-scale"></i> Weight Converter
+                </div>
+                <div class="card-content">
+                    <div class="input-group">
+                        <label for="weightValue">Weight Value</label>
+                        <input type="number" id="weightValue" placeholder="Enter weight" step="any">
+                    </div>
+                    <div class="input-group">
+                        <label>Conversion Type</label>
+                        <div class="conversion-group">
+                            <select id="fromWeight">
+                                <option value="kg">Kilograms (kg)</option>
+                                <option value="g">Grams (g)</option>
+                                <option value="lb">Pounds (lb)</option>
+                            </select>
+                            <span class="icon"><i class="fas fa-exchange-alt"></i></span>
+                            <select id="toWeight">
+                                <option value="lb">Pounds (lb)</option>
+                                <option value="kg">Kilograms (kg)</option>
+                                <option value="g">Grams (g)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button onclick="convertWeight()">Convert</button>
+                    <div class="result" id="weightResult">
+                        Result will appear here
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Set max date for age calculator to today
+        document.getElementById('birthDate').max = new Date().toISOString().split('T')[0];
+
+        // Unit Conversion Calculator
+        function convertUnits() {
+            const value = parseFloat(document.getElementById('conversionValue').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            
+            if (isNaN(value)) {
+                document.getElementById('conversionResult').textContent = 'Please enter a valid number';
+                return;
+            }
+            
+            // Convert to meters first (base unit)
+            let meters;
+            switch(fromUnit) {
+                case 'm': meters = value; break;
+                case 'cm': meters = value / 100; break;
+                case 'km': meters = value * 1000; break;
+                case 'mi': meters = value * 1609.34; break;
+            }
+            
+            // Convert from meters to target unit
+            let result;
+            switch(toUnit) {
+                case 'm': result = meters; break;
+                case 'cm': result = meters * 100; break;
+                case 'km': result = meters / 1000; break;
+                case 'mi': result = meters / 1609.34; break;
+            }
+            
+            document.getElementById('conversionResult').textContent = `${value} ${fromUnit} = ${result.toFixed(6)} ${toUnit}`;
+        }
+
+        // Age Calculator
+        function calculateAge() {
+            const birthDate = new Date(document.getElementById('birthDate').value);
+            const today = new Date();
+            
+            if (isNaN(birthDate.getTime())) {
+                document.getElementById('ageResult').textContent = 'Please select a valid date';
+                return;
+            }
+            
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+            
+            if (days < 0) {
+                months--;
+                // Get the number of days in the previous month
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+            
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+            
+            document.getElementById('ageResult').textContent = `${years} years, ${months} months, ${days} days`;
+        }
+
+        // BMI Calculator
+        function calculateBMI() {
+            const height = parseFloat(document.getElementById('height').value) / 100; // convert cm to m
+            const weight = parseFloat(document.getElementById('weight').value);
+            
+            if (isNaN(height) || isNaN(weight) || height <= 0 || weight <= 0) {
+                document.getElementById('bmiResult').textContent = 'Please enter valid values';
+                return;
+            }
+            
+            const bmi = weight / (height * height);
+            let category;
+            
+            if (bmi < 18.5) category = 'Underweight';
+            else if (bmi < 25) category = 'Normal weight';
+            else if (bmi < 30) category = 'Overweight';
+            else category = 'Obesity';
+            
+            document.getElementById('bmiResult').textContent = `BMI: ${bmi.toFixed(2)} (${category})`;
+        }
+
+        // Weight Converter
+        function convertWeight() {
+            const value = parseFloat(document.getElementById('weightValue').value);
+            const fromWeight = document.getElementById('fromWeight').value;
+            const toWeight = document.getElementById('toWeight').value;
+            
+            if (isNaN(value)) {
+                document.getElementById('weightResult').textContent = 'Please enter a valid number';
+                return;
+            }
+            
+            // Convert to grams first (base unit)
+            let grams;
+            switch(fromWeight) {
+                case 'kg': grams = value * 1000; break;
+                case 'g': grams = value; break;
+                case 'lb': grams = value * 453.592; break;
+            }
+            
+            // Convert from grams to target unit
+            let result;
+            switch(toWeight) {
+                case 'kg': result = grams / 1000; break;
+                case 'g': result = grams; break;
+                case 'lb': result = grams / 453.592; break;
+            }
+            
+            document.getElementById('weightResult').textContent = `${value} ${fromWeight} = ${result.toFixed(6)} ${toWeight}`;
+        }
+    </script>
+</body>
+</html>
