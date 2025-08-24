@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essential Tools Collection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #4A00E0 0%, #007BFF 100%);
+            border-radius: 15px;
+            color: white;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 123, 0.2);
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            opacity: 0.9;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-box {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            outline: none;
+        }
+        
+        .search-button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: linear-gradient(135deg, #4A00E0 0%, #007BFF 100%);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 40px 0 30px;
+            color: #2d3748;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        
+        .tool-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .tool-card h3 i {
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .tool-card p {
+            margin-bottom: 20px;
+            flex-grow: 1;
+            color: #4a5568;
+        }
+        
+        .view-all {
+            display: inline-block;
+            color: #4A00E0;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            align-self: flex-start;
+            transition: color 0.3s ease;
+        }
+        
+        .view-all:hover {
+            color: #007BFF;
+        }
+        
+        /* Category-specific colors */
+        .word-tools {
+            border-top: 5px solid #FFCDD2;
+        }
+        
+        .word-tools h3 {
+            color: #d32f2f;
+        }
+        
+        .image-tools {
+            border-top: 5px solid #BBDEFB;
+        }
+        
+        .image-tools h3 {
+            color: #1976d2;
+        }
+        
+        .pdf-tools {
+            border-top: 5px solid #FFCCBC;
+        }
+        
+        .pdf-tools h3 {
+            color: #ff5722;
+        }
+        
+        .calculator-tools {
+            border-top: 5px solid #B2DFDB;
+        }
+        
+        .calculator-tools h3 {
+            color: #00796b;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                padding: 30px 15px;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>All Your Essential Tools in One Place</h1>
+            <p>For online tools do not guarantee the large safety, PDF manipulation, click/delete, and more. Do not allow you request.</p>
+            
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search to include...">
+                <button class="search-button">Search</button>
+            </div>
+        </header>
+        
+        <h2 class="section-title">Explore Our Tool Categories</h2>
+        <p style="text-align: center; margin-bottom: 30px; color: #4a5568;">We offer a wide range of free online tools to help you with your daily tasks.</p>
+        
+        <div class="tools-grid">
+            <div class="tool-card word-tools">
+                <h3><i class="fas fa-file-word"></i> Word Tools</h3>
+                <p>Key processing, formatting, scanning, searching and run for all your automated tools.</p>
+                <a href="word counter.html" class="view-all">View all →</a>
+            </div>
+            
+            <div class="tool-card image-tools">
+                <h3><i class="fas fa-image"></i> Image Tools</h3>
+                <p>File/address, search, scan and editing your image onto our parent/circle.</p>
+                <a href="img compressor.html" class="view-all">View all →</a>
+            </div>
+            
+            <div class="tool-card pdf-tools">
+                <h3><i class="fas fa-file-pdf"></i> PDF Tools</h3>
+                <p>View, use, compress, remove and add PDF features as easy as we take.</p>
+                <a href="pdf.html" class="view-all">View all →</a>
+            </div>
+            
+            <div class="tool-card calculator-tools">
+                <h3><i class="fas fa-calculator"></i> Calculators</h3>
+                <p>Format, create, break, enter and stop important solutions.</p>
+                <a href="calculator.html" class="view-all">View all →</a>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Essential Tools. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple search functionality
+        document.querySelector('.search-button').addEventListener('click', function() {
+            const searchQuery = document.querySelector('.search-box').value;
+            if (searchQuery.trim() !== '') {
+                alert(`Searching for: ${searchQuery}`);
+            } else {
+                alert('Please enter a search term');
+            }
+        });
+        
+        // Allow Enter key to trigger search
+        document.querySelector('.search-box').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-button').click();
+            }
+        });
+    </script>
+</body>
+</html>
